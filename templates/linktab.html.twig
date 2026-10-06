@@ -1,0 +1,61 @@
+{#
+ # PNCP plugin for GLPI — "PNCP" tab on GLPI contracts and suppliers.
+ # License: GPLv3+ (see LICENSE).
+ #}
+{% import '@pncp/macros.html.twig' as pncp %}
+{% if is_supplier %}
+   <div class="mb-3">
+      {% if ni %}
+         <span class="text-secondary">{{ __('Linked to PNCP identifier', 'pncp') }}</span>
+         <span class="font-monospace fw-medium">{{ ni }}</span>
+      {% else %}
+         <div class="alert alert-info">{{ __('This supplier was not created from PNCP data.', 'pncp') }}</div>
+      {% endif %}
+   </div>
+{% endif %}
+
+{% if contracts is not empty %}
+   <div class="card mb-3">
+      <div class="card-header"><h3 class="card-title">{{ __('PNCP contracts', 'pncp') }}</h3></div>
+      <div class="list-group list-group-flush">
+         {% for c in contracts %}
+            <a class="list-group-item list-group-item-action" href="{{ c.url }}">
+               <div class="fw-medium">{{ c.name }}</div>
+               <div class="small text-secondary"><span class="font-monospace">{{ c.control_number }}</span> · {{ c.value }} · {{ pncp.date(c.begin_date) }} → {{ pncp.date(c.end_date) }}</div>
+            </a>
+         {% endfor %}
+      </div>
+   </div>
+{% endif %}
+
+{% if items is not empty %}
+   <div class="card mb-3">
+      <div class="card-header"><h3 class="card-title">{{ __('Items won in procurements', 'pncp') }}</h3></div>
+      <div class="table-responsive">
+         <table class="table table-sm card-table">
+            <thead>
+               <tr>
+                  <th>{{ __('Source procurement', 'pncp') }}</th>
+                  <th>#</th>
+                  <th>{{ __('Description') }}</th>
+                  <th class="text-end">{{ __('Quantity') }}</th>
+                  <th class="text-end">{{ __('Awarded unit value', 'pncp') }}</th>
+                  <th class="text-end">{{ __('Awarded total', 'pncp') }}</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for i in items %}
+                  <tr>
+                     <td><a href="{{ i.url }}">{{ i.procurement_name }}</a></td>
+                     <td>{{ i.item_number }}</td>
+                     <td class="text-break">{{ i.name }}</td>
+                     <td class="text-end">{{ i.awarded_quantity }}</td>
+                     <td class="text-end text-nowrap">{{ i.unit }}</td>
+                     <td class="text-end text-nowrap">{{ i.total }}</td>
+                  </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+{% endif %}

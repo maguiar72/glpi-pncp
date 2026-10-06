@@ -1,0 +1,54 @@
+{#
+ # PNCP plugin for GLPI — shared template macros.
+ # License: GPLv3+ (see LICENSE).
+ #}
+
+{# One "label: value" line of a read-only detail card. Empty values are skipped. #}
+{% macro row(label, value, raw = false) %}
+   {% if value is not same as(null) and value != '' %}
+      <div class="col-12 col-md-6 col-xl-4 mb-3">
+         <div class="text-secondary small">{{ label }}</div>
+         <div class="fw-medium text-break">{% if raw %}{{ value|raw }}{% else %}{{ value }}{% endif %}</div>
+      </div>
+   {% endif %}
+{% endmacro %}
+
+{# A POST button acting on the current record. #}
+{% macro action(url, id, name, label, icon, class = 'btn-outline-secondary', confirm = null, extra = {}) %}
+   <form method="post" action="{{ url }}" class="d-inline-block me-1 mb-1"
+         {% if confirm %}onsubmit="return confirm('{{ confirm|e('js') }}');"{% endif %}>
+      <input type="hidden" name="id" value="{{ id }}" />
+      {% for k, v in extra %}
+         <input type="hidden" name="{{ k }}" value="{{ v }}" />
+      {% endfor %}
+      <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}" />
+      <button type="submit" name="{{ name }}" value="1" class="btn btn-sm {{ class }}">
+         <i class="{{ icon }}"></i>
+         <span>{{ label }}</span>
+      </button>
+   </form>
+{% endmacro %}
+
+{% macro date(value) %}{{ call('GlpiPlugin\\Pncp\\Record::date', [value]) }}{% endmacro %}
+
+{% macro money(value) %}{{ call('GlpiPlugin\\Pncp\\Record::money', [value]) }}{% endmacro %}
+
+{# Header shared by every imported record. #}
+{% macro header(item, f, portal_url, icon) %}
+   <div class="d-flex align-items-start mb-3">
+      <i class="{{ icon }} fs-1 me-3 text-primary"></i>
+      <div class="flex-grow-1">
+         <h2 class="mb-1">{{ f['name'] }}</h2>
+         <div class="text-secondary">
+            {{ f['org_name'] }}
+            {% if f['unit_name'] %} · {{ f['unit_name'] }} ({{ f['unit_code'] }}){% endif %}
+            {% if f['control_number'] %} · <span class="font-monospace">{{ f['control_number'] }}</span>{% endif %}
+         </div>
+      </div>
+      {% if portal_url %}
+         <a class="btn btn-sm btn-outline-primary ms-2" href="{{ portal_url }}" target="_blank" rel="noopener noreferrer">
+            <i class="ti ti-external-link"></i> {{ __('Open on PNCP', 'pncp') }}
+         </a>
+      {% endif %}
+   </div>
+{% endmacro %}

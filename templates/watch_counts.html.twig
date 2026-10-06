@@ -1,0 +1,23 @@
+{#
+ # PNCP plugin for GLPI — "Imported data" tab of a monitoring.
+ # License: GPLv3+ (see LICENSE).
+ #}
+<div class="row row-cards">
+   {% for r in rows %}
+      <div class="col-6 col-lg-3">
+         <a class="card card-link" href="{{ r.url }}">
+            <div class="card-body">
+               <div class="text-secondary">{{ r.label }}</div>
+               <div class="h1 mb-0">{{ r.count }}</div>
+            </div>
+         </a>
+      </div>
+   {% endfor %}
+</div>
+<div class="mt-3 text-secondary">
+   <i class="ti ti-list-check"></i>
+   {{ __('Procurements waiting for items/results: %d', 'pncp')|format(pending_items) }}
+   ·
+   <i class="ti ti-file-export"></i>
+   {{ __('Contracts copied to GLPI: %d', 'pncp')|format(exported) }}
+</div>

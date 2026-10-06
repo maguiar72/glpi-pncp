@@ -1,0 +1,130 @@
+{#
+ # PNCP plugin for GLPI — procurement (contratação) detail.
+ # License: GPLv3+ (see LICENSE).
+ #}
+{% import '@pncp/macros.html.twig' as pncp %}
+{% set form_url = item.getFormURL() %}
+
+<div class="card mb-3">
+   <div class="card-body">
+      {{ pncp.header(item, f, portal_url, 'ti ti-gavel') }}
+
+      <div class="row">
+         {{ pncp.row(__('Modality', 'pncp'), f['modality_name']) }}
+         {{ pncp.row(__('Number'), f['number'] ~ '/' ~ f['year']) }}
+         {{ pncp.row(__('Status'), f['status_name']) }}
+         {{ pncp.row(__('Process', 'pncp'), f['process']) }}
+         {{ pncp.row(__('Legal basis', 'pncp'), f['legal_basis']) }}
+         {{ pncp.row(__('Price registration (SRP)', 'pncp'), f['is_srp'] ? __('Yes') : __('No')) }}
+         {{ pncp.row(__('Estimated value', 'pncp'), pncp.money(f['estimated_value'])) }}
+         {{ pncp.row(__('Awarded value', 'pncp'), pncp.money(f['awarded_value'])) }}
+         {{ pncp.row(__('Publication date', 'pncp'), pncp.date(f['date_publication'])) }}
+         {{ pncp.row(__('Proposals until', 'pncp'), pncp.date(f['date_proposal_end'])) }}
+         {{ pncp.row(__('Updated on PNCP', 'pncp'), f['date_update']) }}
+         {{ pncp.row(__('Items synchronized on', 'pncp'), pncp.date(f['date_items_sync']) ?: __('Pending', 'pncp')) }}
+      </div>
+      <div class="mb-3">
+         <div class="text-secondary small">{{ __('Object', 'pncp') }}</div>
+         <div class="text-break">{{ f['object']|nl2br }}</div>
+      </div>
+      {% if f['source_url'] %}
+         <a href="{{ f['source_url'] }}" target="_blank" rel="noopener noreferrer" class="small">
+            <i class="ti ti-link"></i> {{ __('Origin system', 'pncp') }}
+         </a>
+      {% endif %}
+   </div>
+   <div class="card-footer">
+      {% if can_update %}
+         {{ pncp.action(form_url, f['id'], 'refresh', __('Refresh from PNCP (with items)', 'pncp'), 'ti ti-refresh', 'btn-outline-primary') }}
+      {% endif %}
+      {% if can_purge %}
+         {{ pncp.action(form_url, f['id'], 'purge', __('Delete permanently'), 'ti ti-trash', 'btn-outline-danger', __('Remove this record from GLPI? It can be imported again.', 'pncp')) }}
+      {% endif %}
+   </div>
+</div>
+
+<div class="card mb-3">
+   <div class="card-header"><h3 class="card-title"><i class="ti ti-list-numbers me-1"></i>{{ __('Items and results', 'pncp') }} ({{ items|length }})</h3></div>
+   {% if items is empty %}
+      <div class="card-body text-secondary">{{ __('Items not synchronized yet.', 'pncp') }}</div>
+   {% else %}
+      <div class="table-responsive">
+         <table class="table table-sm table-hover card-table">
+            <thead>
+               <tr>
+                  <th>#</th>
+                  <th>{{ __('Description') }}</th>
+                  <th class="text-end">{{ __('Quantity') }}</th>
+                  <th class="text-end">{{ __('Estimated unit value', 'pncp') }}</th>
+                  <th>{{ __('Winner', 'pncp') }}</th>
+                  <th class="text-end">{{ __('Awarded unit value', 'pncp') }}</th>
+                  <th class="text-end">{{ __('Awarded total', 'pncp') }}</th>
+                  <th>{{ __('Status') }}</th>
+                  {% if can_update %}<th></th>{% endif %}
+               </tr>
+            </thead>
+            <tbody>
+               {% for i in items %}
+                  <tr>
+                     <td>{{ i.item_number }}</td>
+                     <td class="text-break" style="min-width: 18rem">{{ i.name }}{% if i.measure_unit %} <span class="text-secondary">({{ i.measure_unit }})</span>{% endif %}</td>
+                     <td class="text-end text-nowrap">{{ i.quantity|number_format(2, ',', '.') }}</td>
+                     <td class="text-end text-nowrap">{{ pncp.money(i.estimated_unit_value) }}</td>
+                     <td>
+                        {% if i.supplier_name %}
+                           {{ i.supplier_name }}<br>
+                           <span class="small text-secondary font-monospace">{{ call('GlpiPlugin\\Pncp\\Util::formatNi', [i.supplier_ni]) }}</span>
+                           {% if i.supplier_size %}<span class="badge bg-secondary-lt ms-1">{{ i.supplier_size }}</span>{% endif %}
+                        {% endif %}
+                     </td>
+                     <td class="text-end text-nowrap">{{ pncp.money(i.awarded_unit_value) }}</td>
+                     <td class="text-end text-nowrap">{{ pncp.money(i.awarded_total_value) }}</td>
+                     <td class="small">{{ i.status_name }}</td>
+                     {% if can_update %}
+                        <td>
+                           {% if i.supplier_ni %}
+                              {{ pncp.action(form_url, f['id'], 'export_supplier', __('Supplier → GLPI', 'pncp'), 'ti ti-truck', 'btn-ghost-secondary', null, {'ni': i.supplier_ni, 'supplier_name': i.supplier_name}) }}
+                           {% endif %}
+                        </td>
+                     {% endif %}
+                  </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   {% endif %}
+</div>
+
+<div class="row">
+   <div class="col-12 col-xl-7">
+      <div class="card mb-3">
+         <div class="card-header"><h3 class="card-title"><i class="ti ti-writing-sign me-1"></i>{{ __('Contracts', 'pncp') }} ({{ contracts|length }})</h3></div>
+         <div class="list-group list-group-flush">
+            {% for c in contracts %}
+               <a class="list-group-item list-group-item-action" href="{{ call('GlpiPlugin\\Pncp\\Contract::getFormURLWithID', [c.id]) }}">
+                  <div class="fw-medium">{{ c.name }}</div>
+                  <div class="small text-secondary">{{ c.supplier_name }} · {{ pncp.money(c.global_value) }}{% if c.end_date %} · {{ __('until', 'pncp') }} {{ pncp.date(c.end_date) }}{% endif %}
+                     {% if c.contracts_id %}<span class="badge bg-success-lt ms-1">{{ __('in GLPI', 'pncp') }}</span>{% endif %}</div>
+               </a>
+            {% else %}
+               <div class="list-group-item text-secondary">{{ __('No imported contract for this procurement.', 'pncp') }}</div>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+   <div class="col-12 col-xl-5">
+      <div class="card mb-3">
+         <div class="card-header"><h3 class="card-title"><i class="ti ti-file-certificate me-1"></i>{{ __('Price registration records', 'pncp') }} ({{ pricerecords|length }})</h3></div>
+         <div class="list-group list-group-flush">
+            {% for a in pricerecords %}
+               <a class="list-group-item list-group-item-action" href="{{ call('GlpiPlugin\\Pncp\\PriceRecord::getFormURLWithID', [a.id]) }}">
+                  <div class="fw-medium">{{ a.name }}</div>
+                  <div class="small text-secondary">{{ pncp.date(a.begin_date) }} → {{ pncp.date(a.end_date) }}{% if a.is_cancelled %} <span class="badge bg-danger-lt">{{ __('Cancelled', 'pncp') }}</span>{% endif %}</div>
+               </a>
+            {% else %}
+               <div class="list-group-item text-secondary">{{ __('No imported price registration record.', 'pncp') }}</div>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</div>

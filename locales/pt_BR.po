@@ -1,0 +1,641 @@
+# PNCP plugin for GLPI — Brazilian Portuguese translation.
+# This file is distributed under the same license as the plugin (GPLv3+).
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "%d record(s) imported."
+msgstr "%d registro(s) importado(s)."
+
+msgid "%d records synchronized. The rest continues in the background (automatic action)."
+msgstr "%d registros sincronizados. O restante continua em segundo plano (ação automática)."
+
+msgid "%d result(s)"
+msgstr "%d resultado(s)"
+
+msgid "%d document(s) imported."
+msgstr "%d documento(s) importado(s)."
+
+msgid "%d file(s)"
+msgstr "%d arquivo(s)"
+
+msgid "Active"
+msgstr "Ativo"
+
+msgid "Contract lifecycle (PNCP plugin)"
+msgstr "Ciclo de vida do contrato (plugin PNCP)"
+
+msgid "Creates GLPI suppliers for the suppliers of the contracts, matched by CNPJ/CPF (never duplicated). Item winners: copy them on demand."
+msgstr "Cria Fornecedores no GLPI para os contratados, identificados pelo CNPJ/CPF (sem duplicar). Vencedores de itens: copie sob demanda."
+
+msgid "Documents published on PNCP"
+msgstr "Documentos publicados no PNCP"
+
+msgid "Expired"
+msgstr "Vencido"
+
+msgid "Extended"
+msgstr "Prorrogado"
+
+msgid "File %s is no longer listed on PNCP."
+msgstr "O arquivo %s não está mais listado no PNCP."
+
+msgid "GLPI refused the file %s (type not allowed in Setup > Dropdowns > Document types?)"
+msgstr "O GLPI recusou o arquivo %s (tipo não permitido em Configurar > Listas suspensas > Tipos de documento?)"
+
+msgid "In GLPI, not linked here"
+msgstr "No GLPI, não vinculado aqui"
+
+msgid "Inactive (terminated)"
+msgstr "Inativo (rescindido)"
+
+msgid "Lifecycle"
+msgstr "Ciclo de vida"
+
+msgid "No file published on PNCP for these records."
+msgstr "Nenhum arquivo publicado no PNCP para estes registros."
+
+msgid "Not imported"
+msgstr "Não importado"
+
+msgid "Not started"
+msgstr "A iniciar"
+
+msgid "Search documents on PNCP"
+msgstr "Pesquisar documentos no PNCP"
+
+msgid "Source procurement %s"
+msgstr "Contratação de origem %s"
+
+msgid "(\"pncpsync\" must run in CLI mode, via the GLPI cron)."
+msgstr "(\"pncpsync\" deve rodar no modo CLI, pelo cron do GLPI)."
+
+msgid "A monitoring with a pending backlog is resumed at every automatic action run, regardless of this interval."
+msgstr "Um monitoramento com coleta pendente é retomado a cada execução da ação automática, independentemente deste intervalo."
+
+msgid "A synchronization of this monitoring is already running."
+msgstr "Já existe uma sincronização deste monitoramento em andamento."
+
+msgid "Added value"
+msgstr "Valor acrescido"
+
+msgid "All units"
+msgstr "Todas as unidades"
+
+msgid "Amendments"
+msgstr "Termos aditivos"
+
+msgid "Amendments not synchronized yet."
+msgstr "Termos aditivos ainda não sincronizados."
+
+msgid "Annual plan item (PCA)"
+msgid_plural "Annual plan items (PCA)"
+msgstr[0] "Item do PCA"
+msgstr[1] "Itens do PCA"
+
+msgid "Annual procurement plan (PCA)"
+msgstr "Plano de Contratações Anual (PCA)"
+
+msgid "Automatic actions"
+msgstr "Ações automáticas"
+
+msgid "Awarded total"
+msgstr "Total homologado"
+
+msgid "Awarded unit value"
+msgstr "Valor unitário homologado"
+
+msgid "Awarded value"
+msgstr "Valor homologado"
+
+msgid "Cancelled"
+msgstr "Cancelada"
+
+msgid "Catalog class"
+msgstr "Classificação do catálogo"
+
+msgid "CNPJ of the publishing organization (órgão). Large organizations publish many units under one CNPJ."
+msgstr "CNPJ do órgão que publica. Órgãos grandes publicam muitas unidades sob um mesmo CNPJ."
+
+msgid "Collect from"
+msgstr "Coletar a partir de"
+
+msgid "Collected up to"
+msgstr "Coletado até"
+
+msgid "Contract amendments"
+msgstr "Termos aditivos dos contratos"
+
+msgid "Contract refreshed from PNCP."
+msgstr "Contrato atualizado a partir do PNCP."
+
+msgid "Contracts"
+msgstr "Contratos"
+
+msgid "Contracts copied to GLPI: %d"
+msgstr "Contratos copiados para o GLPI: %d"
+
+msgid "Contracts/records/PCA window (days)"
+msgstr "Janela de contratos/atas/PCA (dias)"
+
+msgid "Copied to GLPI contracts: %s"
+msgstr "Copiado para os Contratos do GLPI: %s"
+
+msgid "Copied to GLPI on"
+msgstr "Copiado para o GLPI em"
+
+msgid "Copied to GLPI on %s."
+msgstr "Copiado para o GLPI em %s."
+
+msgid "Copy contracts automatically"
+msgstr "Copiar contratos automaticamente"
+
+msgid "Copy supplier to GLPI"
+msgstr "Copiar fornecedor para o GLPI"
+
+msgid "Copy suppliers automatically"
+msgstr "Copiar fornecedores automaticamente"
+
+msgid "Copy to GLPI"
+msgstr "Copiar para o GLPI"
+
+msgid "Copy to GLPI contracts"
+msgstr "Copiar para os Contratos do GLPI"
+
+msgid "Copy to GLPI contracts (with supplier)"
+msgstr "Copiar para os Contratos do GLPI (com fornecedor)"
+
+msgid "Copy winning suppliers to GLPI"
+msgstr "Copiar fornecedores vencedores para o GLPI"
+
+msgid "Could not create contract %s"
+msgstr "Não foi possível criar o contrato %s"
+
+msgid "Could not create supplier %s"
+msgstr "Não foi possível criar o fornecedor %s"
+
+msgid "Create monitorings"
+msgstr "Criar monitoramentos"
+
+msgid "Created from PNCP (Portal Nacional de Contratações Públicas)"
+msgstr "Criado a partir do PNCP (Portal Nacional de Contratações Públicas)"
+
+msgid "Creates GLPI suppliers for contract suppliers and item winners, matched by CNPJ/CPF (never duplicated)."
+msgstr "Cria Fornecedores no GLPI para os contratados e vencedores de itens, identificados pelo CNPJ/CPF (sem duplicar)."
+
+msgid "Creates/updates GLPI contracts at each synchronization. Off: copy them on demand from the PNCP contracts list."
+msgstr "Cria/atualiza Contratos no GLPI a cada sincronização. Desligado: copie sob demanda pela lista de contratos PNCP."
+
+msgid "Data from the Portal Nacional de Contratações Públicas (pncp.gov.br)."
+msgstr "Dados do Portal Nacional de Contratações Públicas (pncp.gov.br)."
+
+msgid "Days per query when collecting procurements by CNPJ. Large organizations time out with long windows; 31 is safe."
+msgstr "Dias por consulta ao coletar contratações por CNPJ. Órgãos grandes estouram o tempo com janelas longas; 31 é seguro."
+
+msgid "Desired date"
+msgstr "Data desejada"
+
+msgid "e.g. cleaning services, notebook, organization name"
+msgstr "ex.: serviços de limpeza, notebook, nome do órgão"
+
+msgid "Estimated unit value"
+msgstr "Valor unitário estimado"
+
+msgid "Estimated value"
+msgstr "Valor estimado"
+
+msgid "First date of the first collection. Earlier dates cost more requests (the portal must be queried month by month)."
+msgstr "Data inicial da primeira coleta. Datas mais antigas custam mais consultas (o portal é consultado mês a mês)."
+
+msgid "Global value"
+msgstr "Valor global"
+
+msgid "Global value (PNCP)"
+msgstr "Valor global (PNCP)"
+
+msgid "GLPI contract"
+msgstr "Contrato no GLPI"
+
+msgid "GLPI supplier"
+msgstr "Fornecedor no GLPI"
+
+msgid "Hours between synchronizations"
+msgstr "Horas entre sincronizações"
+
+msgid "How it works"
+msgstr "Como funciona"
+
+msgid "Import selected"
+msgstr "Importar selecionados"
+
+msgid "Import the procurement with its items to see the suppliers."
+msgstr "Importe a contratação com seus itens para ver os fornecedores."
+
+msgid "Imported"
+msgstr "Importado"
+
+msgid "Imported contracts can be copied to GLPI Contracts, and suppliers to GLPI Suppliers."
+msgstr "Contratos importados podem ser copiados para os Contratos do GLPI, e fornecedores para os Fornecedores do GLPI."
+
+msgid "Imported data"
+msgstr "Dados importados"
+
+msgid "in GLPI"
+msgstr "no GLPI"
+
+msgid "Inform a text (name, object...) or an organization CNPJ."
+msgstr "Informe um texto (nome, objeto...) ou o CNPJ de um órgão."
+
+msgid "Initial value"
+msgstr "Valor inicial"
+
+msgid "Invalid CNPJ"
+msgstr "CNPJ inválido"
+
+msgid "Item number"
+msgstr "Número do item"
+
+msgid "Items and results"
+msgstr "Itens e resultados"
+
+msgid "Items and results (winners, prices)"
+msgstr "Itens e resultados (vencedores, preços)"
+
+msgid "Items not synchronized yet."
+msgstr "Itens ainda não sincronizados."
+
+msgid "Items synchronized on"
+msgstr "Itens sincronizados em"
+
+msgid "Items won in procurements"
+msgstr "Itens vencidos em contratações"
+
+msgid "Last synchronization"
+msgstr "Última sincronização"
+
+msgid "Legal basis"
+msgstr "Amparo legal"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Linked to PNCP identifier"
+msgstr "Vinculado ao identificador do PNCP"
+
+msgid "Matches organization, unit, object and supplier names."
+msgstr "Procura em nomes de órgãos, unidades, objetos e fornecedores."
+
+msgid "Message"
+msgstr "Mensagem"
+
+msgid "Minimum interval between requests (seconds)"
+msgstr "Intervalo mínimo entre requisições (segundos)"
+
+msgid "Modality"
+msgstr "Modalidade"
+
+msgid "Monitor"
+msgstr "Monitorar"
+
+msgid "Monitor this organization/unit"
+msgstr "Monitorar este órgão/unidade"
+
+msgid "Monitoring"
+msgid_plural "Monitorings"
+msgstr[0] "Monitoramento"
+msgstr[1] "Monitoramentos"
+
+msgid "Name or text"
+msgstr "Nome ou texto"
+
+msgid "No amendment published."
+msgstr "Nenhum termo aditivo publicado."
+
+msgid "No imported contract for this procurement."
+msgstr "Nenhum contrato importado para esta contratação."
+
+msgid "No imported price registration record."
+msgstr "Nenhuma ata de registro de preços importada."
+
+msgid "No synchronization yet."
+msgstr "Nenhuma sincronização ainda."
+
+msgid "Not collected yet"
+msgstr "Ainda não coletado"
+
+msgid "Nothing found."
+msgstr "Nada encontrado."
+
+msgid "Object"
+msgstr "Objeto"
+
+msgid "Open GLPI contract"
+msgstr "Abrir contrato no GLPI"
+
+msgid "Open GLPI supplier"
+msgstr "Abrir fornecedor no GLPI"
+
+msgid "Open on PNCP"
+msgstr "Abrir no PNCP"
+
+msgid "Optional. Code of the administrative unit (e.g. 012345). Empty = every unit of the CNPJ."
+msgstr "Opcional. Código da unidade administrativa (ex.: 012345). Vazio = todas as unidades do CNPJ."
+
+msgid "Optional. Identify your institution to the portal (e.g. \"GLPI-PNCP/0.1 (ti@example.gov.br)\")."
+msgstr "Opcional. Identifica sua instituição para o portal (ex.: \"GLPI-PNCP/0.1 (ti@exemplo.gov.br)\")."
+
+msgid "Organization"
+msgstr "Órgão"
+
+msgid "Organization / unit"
+msgstr "Órgão / unidade"
+
+msgid "Organization CNPJ"
+msgstr "CNPJ do órgão"
+
+msgid "Origin system"
+msgstr "Sistema de origem"
+
+msgid "Page %1$d of %2$d"
+msgstr "Página %1$d de %2$d"
+
+msgid "Pending"
+msgstr "Pendente"
+
+msgid "Phase"
+msgstr "Fase"
+
+msgid "PNCP contract"
+msgid_plural "PNCP contracts"
+msgstr[0] "Contrato PNCP"
+msgstr[1] "Contratos PNCP"
+
+msgid "PNCP contracts"
+msgstr "Contratos PNCP"
+
+msgid "PNCP control number"
+msgstr "Número de controle PNCP"
+
+msgid "PNCP error: %s"
+msgstr "Erro do PNCP: %s"
+
+msgid "PNCP took too long to answer. Try again in a few moments."
+msgstr "O PNCP demorou demais para responder. Tente novamente em instantes."
+
+msgid "PNCP was slow: some records were not imported. Select them again."
+msgstr "O PNCP estava lento: alguns registros não foram importados. Selecione-os novamente."
+
+msgid "PNCP: search, monitorings and imported data"
+msgstr "PNCP: pesquisa, monitoramentos e dados importados"
+
+msgid "Price registration (SRP)"
+msgstr "Registro de preços (SRP)"
+
+msgid "Price registration record"
+msgid_plural "Price registration records"
+msgstr[0] "Ata de registro de preços"
+msgstr[1] "Atas de registro de preços"
+
+msgid "Price registration records"
+msgstr "Atas de registro de preços"
+
+msgid "Process"
+msgstr "Processo"
+
+msgid "Procurement"
+msgid_plural "Procurements"
+msgstr[0] "Contratação"
+msgstr[1] "Contratações"
+
+msgid "Procurement group"
+msgstr "Grupo de contratação"
+
+msgid "Procurement refreshed from PNCP (%d items)."
+msgstr "Contratação atualizada a partir do PNCP (%d itens)."
+
+msgid "Procurement window (days)"
+msgstr "Janela de contratações (dias)"
+
+msgid "Procurements"
+msgstr "Contratações"
+
+msgid "Procurements waiting for items/results: %d"
+msgstr "Contratações aguardando itens/resultados: %d"
+
+msgid "Proposals until"
+msgstr "Propostas até"
+
+msgid "Publication date"
+msgstr "Data de publicação"
+
+msgid "Raw data"
+msgstr "Dados brutos"
+
+msgid "Record"
+msgstr "Registro"
+
+msgid "Record exactly as returned by the PNCP API (source of truth for every other field)."
+msgstr "Registro exatamente como devolvido pela API do PNCP (fonte de todos os demais campos)."
+
+msgid "Records"
+msgstr "Registros"
+
+msgid "Refresh from PNCP"
+msgstr "Atualizar do PNCP"
+
+msgid "Refresh from PNCP (with items)"
+msgstr "Atualizar do PNCP (com itens)"
+
+msgid "Registered suppliers (item winners)"
+msgstr "Fornecedores registrados (vencedores dos itens)"
+
+msgid "Remove this record from GLPI? It can be imported again."
+msgstr "Remover este registro do GLPI? Ele pode ser importado de novo."
+
+msgid "Remove this record from GLPI? The GLPI contract, if any, is kept."
+msgstr "Remover este registro do GLPI? O contrato no GLPI, se houver, é mantido."
+
+msgid "Requests"
+msgstr "Requisições"
+
+msgid "Requests are sequential on purpose: parallel requests only multiply HTTP 429 answers from the portal."
+msgstr "As requisições são sequenciais de propósito: em paralelo, só multiplicam as respostas HTTP 429 do portal."
+
+msgid "Runs for up to one minute; the automatic action continues the rest."
+msgstr "Roda por até um minuto; a ação automática continua o restante."
+
+msgid "Search by name/text, or by organization CNPJ (optionally narrowed to one unit and one year)."
+msgstr "Pesquise por nome/texto, ou pelo CNPJ do órgão (opcionalmente restrito a uma unidade e a um ano)."
+
+msgid "Search PNCP"
+msgstr "Pesquisar no PNCP"
+
+msgid "Select at least one record."
+msgstr "Selecione ao menos um registro."
+
+msgid "Select records and click \"Import selected\": procurements come with items and results, contracts with amendments, price records with their procurement."
+msgstr "Selecione registros e clique em \"Importar selecionados\": contratações vêm com itens e resultados, contratos com termos aditivos, atas com a contratação de origem."
+
+msgid "Settings saved."
+msgstr "Configurações salvas."
+
+msgid "Signature date"
+msgstr "Data de assinatura"
+
+msgid "Source procurement"
+msgstr "Contratação de origem"
+
+msgid "Supplier CNPJ/CPF"
+msgstr "CNPJ/CPF do fornecedor"
+
+msgid "Supplier copied to GLPI: %s"
+msgstr "Fornecedor copiado para o GLPI: %s"
+
+msgid "Supplier → GLPI"
+msgstr "Fornecedor → GLPI"
+
+msgid "Synchronization"
+msgstr "Sincronização"
+
+msgid "Synchronization complete: %d records."
+msgstr "Sincronização concluída: %d registros."
+
+msgid "Synchronization failed: %s"
+msgstr "Falha na sincronização: %s"
+
+msgid "Synchronization log"
+msgstr "Log de sincronização"
+
+msgid "Synchronize / import / copy to GLPI"
+msgstr "Sincronizar / importar / copiar para o GLPI"
+
+msgid "Synchronize monitored PNCP scopes"
+msgstr "Sincronizar os monitoramentos do PNCP"
+
+msgid "Synchronize now"
+msgstr "Sincronizar agora"
+
+msgid "Term"
+msgstr "Vigência"
+
+msgid "This CNPJ has no units registered on PNCP."
+msgstr "Este CNPJ não tem unidades cadastradas no PNCP."
+
+msgid "This price registration record was cancelled."
+msgstr "Esta ata de registro de preços foi cancelada."
+
+msgid "This supplier was not created from PNCP data."
+msgstr "Este fornecedor não foi criado a partir de dados do PNCP."
+
+msgid "Time budget of an automatic action run (seconds)"
+msgstr "Tempo máximo de cada execução da ação automática (segundos)"
+
+msgid "Time budget of an interactive action (seconds)"
+msgstr "Tempo máximo de uma ação interativa (segundos)"
+
+msgid "To keep an organization or unit up to date automatically, create a monitoring."
+msgstr "Para manter um órgão ou unidade atualizado automaticamente, crie um monitoramento."
+
+msgid "Total value"
+msgstr "Valor total"
+
+msgid "Unit"
+msgstr "Unidade"
+
+msgid "Unit %s not found for this CNPJ."
+msgstr "Unidade %s não encontrada para este CNPJ."
+
+msgid "Unit code"
+msgstr "Código da unidade"
+
+msgid "Unit value"
+msgstr "Valor unitário"
+
+msgid "until"
+msgstr "até"
+
+msgid "Update GLPI contract"
+msgstr "Atualizar contrato no GLPI"
+
+msgid "Updated on PNCP"
+msgstr "Atualizado no PNCP"
+
+msgid "User-Agent"
+msgstr "User-Agent"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "What to collect"
+msgstr "O que coletar"
+
+msgid "Window"
+msgstr "Janela"
+
+msgid "Winner"
+msgstr "Vencedor"
+
+msgid "Contract commitments (empenhos)"
+msgstr "Empenhos dos contratos"
+
+msgid "Commitments (empenhos)"
+msgstr "Empenhos"
+
+msgid "No commitment published."
+msgstr "Nenhum empenho publicado."
+
+msgid "Commitments not synchronized yet."
+msgstr "Empenhos ainda não sincronizados."
+
+msgid "Commitment"
+msgstr "Empenho"
+
+msgid "Issue date"
+msgstr "Data de emissão"
+
+msgid "Creditor"
+msgstr "Credor"
+
+msgid "Expense nature"
+msgstr "Natureza da despesa"
+
+msgid "GLPI contract not found or not editable."
+msgstr "Contrato do GLPI não encontrado ou sem permissão de edição."
+
+msgid "This GLPI contract is already linked to another PNCP contract."
+msgstr "Este contrato do GLPI já está vinculado a outro contrato do PNCP."
+
+msgid "Linked to the existing GLPI contract: %s. Fields already filled in were kept; empty ones were completed."
+msgstr "Vinculado ao contrato já existente no GLPI: %s. Os campos já preenchidos foram mantidos; os vazios foram completados."
+
+msgid "A matching GLPI contract already existed and was linked: %s. Fields already filled in were kept."
+msgstr "Já existia um contrato correspondente no GLPI e ele foi vinculado: %s. Os campos já preenchidos foram mantidos."
+
+msgid "GLPI contracts that look like this one"
+msgstr "Contratos do GLPI que parecem ser este"
+
+msgid "The contract currently linked was created by the copy. Linking to the existing one keeps what is already filled in there and sends the copy to the GLPI trash."
+msgstr "O contrato vinculado hoje foi criado pela cópia. Vincular ao existente mantém o que já está preenchido nele e envia a cópia para a lixeira do GLPI."
+
+msgid "Same number/year already registered in GLPI. Link instead of creating a duplicate: what is already filled in is kept, empty fields are completed."
+msgstr "Já existe no GLPI um contrato com o mesmo número/ano. Vincule em vez de criar uma duplicata: o que já está preenchido é mantido e os campos vazios são completados."
+
+msgid "Number only"
+msgstr "Apenas o número"
+
+msgid "Link to this contract"
+msgstr "Vincular a este contrato"
+
+msgid "Link to this GLPI contract?"
+msgstr "Vincular a este contrato do GLPI?"
+
+msgid "Also linked to the GLPI contract: %s."
+msgstr "Também vinculados ao contrato do GLPI: %s."
+
+msgid "This contract was not copied to GLPI yet: the documents appear in the GLPI contract once you copy it."
+msgstr "Este contrato ainda não foi copiado para o GLPI: os documentos aparecerão no contrato do GLPI quando você o copiar."
+
+msgid "Year"
+msgstr "Ano"

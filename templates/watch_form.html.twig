@@ -1,0 +1,75 @@
+{#
+ # PNCP plugin for GLPI — monitoring form.
+ # License: GPLv3+ (see LICENSE).
+ #}
+{% extends "generic_show_form.html.twig" %}
+{% import 'components/form/fields_macros.html.twig' as fields %}
+{% import '@pncp/macros.html.twig' as pncp %}
+
+{% block more_fields %}
+   {{ fields.textField('cnpj', item.fields['cnpj'], __('Organization CNPJ', 'pncp'), {
+      'required': true,
+      'helper': __('CNPJ of the publishing organization (órgão). Large organizations publish many units under one CNPJ.', 'pncp'),
+   }) }}
+
+   {% set unit_helper = __('Optional. Code of the administrative unit (e.g. 012345). Empty = every unit of the CNPJ.', 'pncp') %}
+   {% if units is not empty %}
+      {% set unit_options = {'': '— ' ~ __('All units', 'pncp') ~ ' —'} %}
+      {% for u in units %}
+         {% set unit_options = unit_options|merge({(u['pncp_code']): u['pncp_code'] ~ ' — ' ~ u['name'] ~ (u['town'] ? ' (' ~ u['town'] ~ '/' ~ u['state'] ~ ')' : '')}) %}
+      {% endfor %}
+      {{ fields.dropdownArrayField('unit_code', item.fields['unit_code'], unit_options, __('Unit', 'pncp'), {'helper': unit_helper}) }}
+   {% else %}
+      {{ fields.textField('unit_code', item.fields['unit_code'], __('Unit code', 'pncp'), {'helper': unit_helper}) }}
+   {% endif %}
+
+   {{ fields.dateField('date_begin', item.fields['date_begin'], __('Collect from', 'pncp'), {
+      'helper': __('First date of the first collection. Earlier dates cost more requests (the portal must be queried month by month).', 'pncp'),
+   }) }}
+
+   {{ fields.dropdownYesNo('is_active', item.fields['is_active'], __('Active')) }}
+
+   {{ fields.largeTitle(__('What to collect', 'pncp'), 'ti ti-database-import') }}
+   {{ fields.dropdownYesNo('sync_procurements', item.fields['sync_procurements'], __('Procurements', 'pncp')) }}
+   {{ fields.dropdownYesNo('sync_items', item.fields['sync_items'], __('Items and results (winners, prices)', 'pncp')) }}
+   {{ fields.dropdownYesNo('sync_contracts', item.fields['sync_contracts'], __('Contracts', 'pncp')) }}
+   {{ fields.dropdownYesNo('sync_amendments', item.fields['sync_amendments'], __('Contract amendments', 'pncp')) }}
+   {{ fields.dropdownYesNo('sync_commitments', item.fields['sync_commitments'], __('Contract commitments (empenhos)', 'pncp')) }}
+   {{ fields.dropdownYesNo('sync_pricerecords', item.fields['sync_pricerecords'], __('Price registration records', 'pncp')) }}
+   {{ fields.dropdownYesNo('sync_pca', item.fields['sync_pca'], __('Annual procurement plan (PCA)', 'pncp')) }}
+
+   {{ fields.largeTitle(__('Copy to GLPI', 'pncp'), 'ti ti-copy') }}
+   {{ fields.dropdownYesNo('auto_suppliers', item.fields['auto_suppliers'], __('Copy suppliers automatically', 'pncp'), {
+      'helper': __('Creates GLPI suppliers for the suppliers of the contracts, matched by CNPJ/CPF (never duplicated). Item winners: copy them on demand.', 'pncp'),
+   }) }}
+   {{ fields.dropdownYesNo('auto_contracts', item.fields['auto_contracts'], __('Copy contracts automatically', 'pncp'), {
+      'helper': __('Creates/updates GLPI contracts at each synchronization. Off: copy them on demand from the PNCP contracts list.', 'pncp'),
+   }) }}
+
+   {% if not item.isNewItem() %}
+      {{ fields.largeTitle(__('Synchronization', 'pncp'), 'ti ti-refresh') }}
+      {{ fields.readOnlyField('last_sync', item.fields['last_sync'], __('Last synchronization', 'pncp')) }}
+      {{ fields.readOnlyField('last_status', item.fields['last_status'], __('Status')) }}
+      {% if item.fields['last_message'] %}
+         {{ fields.readOnlyField('last_message', item.fields['last_message'], __('Message', 'pncp'), {'full_width': true}) }}
+      {% endif %}
+      {% set progress %}
+         {% for phase, date in cursors %}
+            <span class="badge bg-secondary-lt me-1">{{ phase }}: {{ pncp.date(date) }}</span>
+         {% else %}
+            <span class="text-secondary">{{ __('Not collected yet', 'pncp') }}</span>
+         {% endfor %}
+      {% endset %}
+      {{ fields.htmlField('', progress, __('Collected up to', 'pncp'), {'full_width': true}) }}
+      {% if can_sync %}
+         {% set sync_button %}
+            <button type="submit" name="synchronize" value="1" class="btn btn-outline-primary"
+                    title="{{ __('Runs for up to one minute; the automatic action continues the rest.', 'pncp') }}">
+               <i class="ti ti-refresh"></i>
+               <span>{{ __('Synchronize now', 'pncp') }}</span>
+            </button>
+         {% endset %}
+         {{ fields.htmlField('', sync_button, '', {'full_width': true}) }}
+      {% endif %}
+   {% endif %}
+{% endblock %}

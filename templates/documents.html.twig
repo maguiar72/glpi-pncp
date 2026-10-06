@@ -1,0 +1,76 @@
+{#
+ # PNCP plugin for GLPI — files published on PNCP for a record, with import.
+ # License: GPLv3+ (see LICENSE).
+ #}
+<div class="container-fluid">
+   <div class="d-flex align-items-center mb-3">
+      <a class="btn btn-outline-secondary me-3" href="{{ item_url }}"><i class="ti ti-arrow-left"></i><span>{{ __('Back') }}</span></a>
+      <div>
+         <h2 class="mb-0">{{ __('Documents published on PNCP', 'pncp') }}</h2>
+         <div class="text-secondary">{{ item_name }}</div>
+      </div>
+      {% if glpi_contract_url %}
+         <a class="btn btn-success ms-auto" href="{{ glpi_contract_url }}"><i class="ti ti-external-link"></i><span>{{ __('Open GLPI contract', 'pncp') }}</span></a>
+      {% endif %}
+   </div>
+
+   {% for e in errors %}
+      <div class="alert alert-warning"><i class="ti ti-alert-triangle me-1"></i>{{ e }}</div>
+   {% endfor %}
+
+   <form method="post" action="{{ action }}" class="card">
+      <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}" />
+      <input type="hidden" name="itemtype" value="{{ itemtype }}" />
+      <input type="hidden" name="items_id" value="{{ items_id }}" />
+      <div class="card-header d-flex align-items-center">
+         <h3 class="card-title mb-0">{{ __('%d file(s)', 'pncp')|format(files|length) }}</h3>
+         {% if can_import and files is not empty %}
+            <button type="submit" name="import" value="1" class="btn btn-primary btn-sm ms-auto">
+               <i class="ti ti-download"></i><span>{{ __('Import selected', 'pncp') }}</span>
+            </button>
+         {% endif %}
+      </div>
+      {% if files is empty %}
+         <div class="card-body text-secondary">{{ __('No file published on PNCP for these records.', 'pncp') }}</div>
+      {% else %}
+         <div class="table-responsive">
+            <table class="table table-hover card-table">
+               <thead>
+                  <tr>
+                     {% if can_import %}<th class="w-1"><input type="checkbox" class="form-check-input" onclick="document.querySelectorAll('.pncp-file').forEach(c => { if (!c.disabled) c.checked = this.checked; })" /></th>{% endif %}
+                     <th>{{ __('Title') }}</th>
+                     <th>{{ __('Type') }}</th>
+                     <th>{{ __('Record', 'pncp') }}</th>
+                     <th>{{ __('Publication date', 'pncp') }}</th>
+                     <th>{{ __('Status') }}</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for f in files %}
+                     <tr>
+                        {% if can_import %}
+                           <td><input type="checkbox" class="form-check-input pncp-file" name="selected[]" value="{{ f.key }}" {{ f.linked ? 'disabled' : '' }} /></td>
+                        {% endif %}
+                        <td class="text-break">
+                           <a href="{{ f.url }}" target="_blank" rel="noopener noreferrer"><i class="ti ti-file-download me-1"></i>{{ f.title }}</a>
+                        </td>
+                        <td>{{ f.type }}</td>
+                        <td class="small">{{ f.source }}</td>
+                        <td class="text-nowrap">{{ f.date }}</td>
+                        <td class="text-nowrap">
+                           {% if f.linked %}
+                              <a href="{{ f.document_url }}" class="badge bg-success-lt"><i class="ti ti-check"></i> {{ __('Imported', 'pncp') }}</a>
+                           {% elseif f.documents_id %}
+                              <a href="{{ f.document_url }}" class="badge bg-azure-lt">{{ __('In GLPI, not linked here', 'pncp') }}</a>
+                           {% else %}
+                              <span class="badge bg-secondary-lt">{{ __('Not imported', 'pncp') }}</span>
+                           {% endif %}
+                        </td>
+                     </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      {% endif %}
+   </form>
+</div>

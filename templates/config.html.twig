@@ -1,0 +1,40 @@
+{#
+ # PNCP plugin for GLPI — settings.
+ # License: GPLv3+ (see LICENSE).
+ #}
+{% import 'components/form/fields_macros.html.twig' as fields %}
+
+<form method="post" action="{{ action }}" class="card">
+   <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}" />
+   <div class="card-header"><h2 class="card-title"><i class="ti ti-settings me-1"></i>PNCP — {{ __('Settings') }}</h2></div>
+   <div class="card-body">
+      <div class="row">
+         {{ fields.numberField('window_procurements', values.window_procurements, __('Procurement window (days)', 'pncp'), {
+            'min': 1, 'max': 364,
+            'helper': __('Days per query when collecting procurements by CNPJ. Large organizations time out with long windows; 31 is safe.', 'pncp'),
+         }) }}
+         {{ fields.numberField('window_others', values.window_others, __('Contracts/records/PCA window (days)', 'pncp'), {
+            'min': 1, 'max': 364,
+         }) }}
+         {{ fields.numberField('sync_interval', values.sync_interval, __('Hours between synchronizations', 'pncp'), {
+            'min': 1, 'max': 168,
+            'helper': __('A monitoring with a pending backlog is resumed at every automatic action run, regardless of this interval.', 'pncp'),
+         }) }}
+         {{ fields.numberField('cron_budget', values.cron_budget, __('Time budget of an automatic action run (seconds)', 'pncp'), {'min': 30, 'max': 3000}) }}
+         {{ fields.numberField('web_budget', values.web_budget, __('Time budget of an interactive action (seconds)', 'pncp'), {'min': 10, 'max': 300}) }}
+         {{ fields.textField('min_interval', values.min_interval, __('Minimum interval between requests (seconds)', 'pncp'), {
+            'helper': __('Requests are sequential on purpose: parallel requests only multiply HTTP 429 answers from the portal.', 'pncp'),
+         }) }}
+         {{ fields.textField('user_agent', values.user_agent, __('User-Agent', 'pncp'), {
+            'helper': __('Optional. Identify your institution to the portal (e.g. "GLPI-PNCP/0.1 (ti@example.gov.br)").', 'pncp'),
+         }) }}
+      </div>
+      <div class="mt-2">
+         <a href="{{ cron_url }}"><i class="ti ti-clock-play"></i> {{ __('Automatic actions', 'pncp') }}</a>
+         <span class="text-secondary small ms-1">{{ __('("pncpsync" must run in CLI mode, via the GLPI cron).', 'pncp') }}</span>
+      </div>
+   </div>
+   <div class="card-footer">
+      <button type="submit" name="update" value="1" class="btn btn-primary"><i class="ti ti-device-floppy"></i><span>{{ _x('button', 'Save') }}</span></button>
+   </div>
+</form>

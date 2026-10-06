@@ -1,0 +1,155 @@
+{#
+ # PNCP plugin for GLPI — interactive search on the portal.
+ # License: GPLv3+ (see LICENSE).
+ #}
+<div class="container-fluid pncp-search">
+   <form method="get" action="{{ action }}" class="card mb-3">
+      <div class="card-header">
+         <h2 class="card-title"><i class="ti ti-search me-1"></i>{{ __('Search PNCP', 'pncp') }}</h2>
+      </div>
+      <div class="card-body">
+         <div class="row g-3">
+            <div class="col-12 col-lg-4">
+               <label class="form-label" for="pncp-q">{{ __('Name or text', 'pncp') }}</label>
+               <input type="text" class="form-control" id="pncp-q" name="q" value="{{ filters.q }}"
+                      placeholder="{{ __('e.g. cleaning services, notebook, organization name', 'pncp') }}" />
+               <div class="form-hint">{{ __('Matches organization, unit, object and supplier names.', 'pncp') }}</div>
+            </div>
+            <div class="col-6 col-lg-2">
+               <label class="form-label" for="pncp-cnpj">{{ __('Organization CNPJ', 'pncp') }}</label>
+               <input type="text" class="form-control" id="pncp-cnpj" name="cnpj" value="{{ filters.cnpj }}" placeholder="00.000.000/0000-00" />
+            </div>
+            <div class="col-6 col-lg-2">
+               <label class="form-label" for="pncp-unit">{{ __('Unit code', 'pncp') }}</label>
+               {% if units is not empty %}
+                  <select class="form-select" id="pncp-unit" name="unit">
+                     <option value="">— {{ __('All units', 'pncp') }} —</option>
+                     {% for u in units %}
+                        <option value="{{ u.pncp_code }}" {{ filters.unit and call('GlpiPlugin\\Pncp\\Util::unitCode', [filters.unit]) == u.code ? 'selected' : '' }}>{{ u.pncp_code }} — {{ u.name }}</option>
+                     {% endfor %}
+                  </select>
+               {% else %}
+                  <input type="text" class="form-control" id="pncp-unit" name="unit" value="{{ filters.unit }}" placeholder="012345" />
+               {% endif %}
+            </div>
+            <div class="col-6 col-lg-1">
+               <label class="form-label" for="pncp-year">{{ __('Year', 'pncp') }}</label>
+               <input type="number" class="form-control" id="pncp-year" name="year" min="2021" max="2100" value="{{ filters.year }}" />
+            </div>
+            <div class="col-6 col-lg-3">
+               <label class="form-label" for="pncp-type">{{ __('Type') }}</label>
+               <select class="form-select" id="pncp-type" name="type">
+                  {% for k, label in types %}
+                     <option value="{{ k }}" {{ filters.type == k ? 'selected' : '' }}>{{ label }}</option>
+                  {% endfor %}
+               </select>
+            </div>
+         </div>
+      </div>
+      <div class="card-footer d-flex align-items-center">
+         <button type="submit" name="go" value="1" class="btn btn-primary">
+            <i class="ti ti-search"></i><span>{{ __('Search') }}</span>
+         </button>
+         {% if can_watch and filters.cnpj %}
+            <a class="btn btn-outline-secondary ms-2"
+               href="{{ watch_url }}?{{ {'cnpj': filters.cnpj, 'unit_code': filters.unit}|url_encode }}">
+               <i class="ti ti-radar"></i><span>{{ __('Monitor this organization/unit', 'pncp') }}</span>
+            </a>
+         {% endif %}
+         <span class="ms-auto text-secondary small">{{ __('Data from the Portal Nacional de Contratações Públicas (pncp.gov.br).', 'pncp') }}</span>
+      </div>
+   </form>
+
+   {% if error %}
+      <div class="alert alert-danger"><i class="ti ti-alert-triangle me-1"></i>{{ error }}</div>
+   {% elseif submitted %}
+      <form method="post" action="{{ action }}" class="card">
+         <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}" />
+         <div class="card-header d-flex align-items-center">
+            <h3 class="card-title mb-0">{{ __('%d result(s)', 'pncp')|format(total) }}</h3>
+            {% if can_import and rows is not empty %}
+               <button type="submit" name="import" value="1" class="btn btn-primary btn-sm ms-auto">
+                  <i class="ti ti-download"></i><span>{{ __('Import selected', 'pncp') }}</span>
+               </button>
+            {% endif %}
+         </div>
+         {% if rows is empty %}
+            <div class="card-body text-secondary">{{ __('Nothing found.', 'pncp') }}</div>
+         {% else %}
+            <div class="table-responsive">
+               <table class="table table-hover card-table align-top">
+                  <thead>
+                     <tr>
+                        {% if can_import %}<th class="w-1"><input type="checkbox" class="form-check-input" onclick="document.querySelectorAll('.pncp-select').forEach(c => c.checked = this.checked)" /></th>{% endif %}
+                        <th>{{ __('Record', 'pncp') }}</th>
+                        <th>{{ __('Organization / unit', 'pncp') }}</th>
+                        <th class="text-end">{{ __('Value', 'pncp') }}</th>
+                        <th>{{ __('Date') }}</th>
+                        <th></th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% for r in rows %}
+                        <tr>
+                           {% if can_import %}
+                              <td><input type="checkbox" class="form-check-input pncp-select" name="selected[]" value="{{ r.key }}" /></td>
+                           {% endif %}
+                           <td style="min-width: 22rem">
+                              <div class="fw-medium">{{ r.title }}
+                                 {% if r.modality %}<span class="badge bg-blue-lt ms-1">{{ r.modality }}</span>{% endif %}
+                                 {% if r.status %}<span class="badge bg-secondary-lt ms-1">{{ r.status }}</span>{% endif %}
+                              </div>
+                              <div class="small text-break">{{ r.object }}</div>
+                              {% if r.supplier %}<div class="small text-secondary"><i class="ti ti-truck"></i> {{ r.supplier }}</div>{% endif %}
+                              <div class="small text-secondary font-monospace">{{ r.control }}</div>
+                           </td>
+                           <td>
+                              <div>{{ r.org }}</div>
+                              <div class="small text-secondary">{{ r.unit_code }} — {{ r.unit_name }}{% if r.town %} · {{ r.town }}{% endif %}</div>
+                              {% if can_watch %}
+                                 <a class="small" href="{{ watch_url }}?{{ {'cnpj': r.cnpj, 'unit_code': r.unit_code, 'name': r.unit_name}|url_encode }}">
+                                    <i class="ti ti-radar"></i> {{ __('Monitor', 'pncp') }}
+                                 </a>
+                              {% endif %}
+                           </td>
+                           <td class="text-end text-nowrap">{{ r.value }}</td>
+                           <td class="text-nowrap small">{{ r.date }}{% if r.validity %}<div class="text-secondary">{{ r.validity }}</div>{% endif %}</td>
+                           <td class="text-nowrap">
+                              {% if r.imported %}
+                                 <a href="{{ r.imported }}" class="badge bg-success-lt"><i class="ti ti-check"></i> {{ __('Imported', 'pncp') }}</a><br>
+                              {% endif %}
+                              <a href="{{ r.portal_url }}" target="_blank" rel="noopener noreferrer" class="small"><i class="ti ti-external-link"></i> PNCP</a>
+                           </td>
+                        </tr>
+                     {% endfor %}
+                  </tbody>
+               </table>
+            </div>
+            {% if pages > 1 %}
+               <div class="card-footer d-flex justify-content-between align-items-center">
+                  {% set base = filters|merge({'go': 1}) %}
+                  {% if filters.page > 1 %}
+                     <a class="btn btn-sm btn-outline-secondary" href="{{ action }}?{{ base|merge({'page': filters.page - 1})|url_encode }}"><i class="ti ti-chevron-left"></i>{{ __('Previous') }}</a>
+                  {% else %}<span></span>{% endif %}
+                  <span class="text-secondary">{{ __('Page %1$d of %2$d', 'pncp')|format(filters.page, pages) }}</span>
+                  {% if filters.page < pages %}
+                     <a class="btn btn-sm btn-outline-secondary" href="{{ action }}?{{ base|merge({'page': filters.page + 1})|url_encode }}">{{ __('Next') }}<i class="ti ti-chevron-right"></i></a>
+                  {% else %}<span></span>{% endif %}
+               </div>
+            {% endif %}
+         {% endif %}
+      </form>
+   {% else %}
+      <div class="card">
+         <div class="card-body text-secondary">
+            <p class="mb-2"><strong>{{ __('How it works', 'pncp') }}</strong></p>
+            <ul class="mb-0">
+               <li>{{ __('Search by name/text, or by organization CNPJ (optionally narrowed to one unit and one year).', 'pncp') }}</li>
+               <li>{{ __('Select records and click "Import selected": procurements come with items and results, contracts with amendments, price records with their procurement.', 'pncp') }}</li>
+               <li>{{ __('To keep an organization or unit up to date automatically, create a monitoring.', 'pncp') }}</li>
+               <li>{{ __('Imported contracts can be copied to GLPI Contracts, and suppliers to GLPI Suppliers.', 'pncp') }}</li>
+            </ul>
+         </div>
+      </div>
+   {% endif %}
+</div>

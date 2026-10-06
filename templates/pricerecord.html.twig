@@ -1,0 +1,48 @@
+{#
+ # PNCP plugin for GLPI — price registration record (ata) detail.
+ # License: GPLv3+ (see LICENSE).
+ #}
+{% import '@pncp/macros.html.twig' as pncp %}
+{% set form_url = item.getFormURL() %}
+
+<div class="card mb-3">
+   <div class="card-body">
+      {{ pncp.header(item, f, portal_url, 'ti ti-file-certificate') }}
+      {% if f['is_cancelled'] %}
+         <div class="alert alert-danger"><i class="ti ti-ban me-1"></i>{{ __('This price registration record was cancelled.', 'pncp') }}</div>
+      {% endif %}
+      <div class="row">
+         {{ pncp.row(__('Number'), f['number'] ~ '/' ~ f['year']) }}
+         {{ pncp.row(__('Signature date', 'pncp'), pncp.date(f['date_signature'])) }}
+         {{ pncp.row(__('Start date'), pncp.date(f['begin_date'])) }}
+         {{ pncp.row(__('End date'), pncp.date(f['end_date'])) }}
+         {{ pncp.row(__('Updated on PNCP', 'pncp'), f['date_update']) }}
+         {% if procurement %}
+            {% set proc_link %}<a href="{{ call('GlpiPlugin\\Pncp\\Procurement::getFormURLWithID', [procurement.id]) }}">{{ procurement.name }}</a>{% endset %}
+            {{ pncp.row(__('Source procurement', 'pncp'), proc_link, true) }}
+         {% else %}
+            {{ pncp.row(__('Source procurement', 'pncp'), f['procurement_control_number']) }}
+         {% endif %}
+      </div>
+      <div>
+         <div class="text-secondary small">{{ __('Object', 'pncp') }}</div>
+         <div class="text-break">{{ f['object']|nl2br }}</div>
+      </div>
+   </div>
+   {% if can_purge %}
+      <div class="card-footer">
+         {{ pncp.action(form_url, f['id'], 'purge', __('Delete permanently'), 'ti ti-trash', 'btn-outline-danger', __('Remove this record from GLPI? It can be imported again.', 'pncp')) }}
+      </div>
+   {% endif %}
+</div>
+
+<div class="card mb-3">
+   <div class="card-header"><h3 class="card-title"><i class="ti ti-truck me-1"></i>{{ __('Registered suppliers (item winners)', 'pncp') }}</h3></div>
+   <div class="list-group list-group-flush">
+      {% for w in winners %}
+         <div class="list-group-item">{{ w.supplier_name }} <span class="text-secondary font-monospace small ms-1">{{ w.ni_formatted }}</span></div>
+      {% else %}
+         <div class="list-group-item text-secondary">{{ __('Import the procurement with its items to see the suppliers.', 'pncp') }}</div>
+      {% endfor %}
+   </div>
+</div>

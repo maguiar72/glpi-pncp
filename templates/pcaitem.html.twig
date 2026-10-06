@@ -1,0 +1,28 @@
+{#
+ # PNCP plugin for GLPI — annual procurement plan (PCA) item detail.
+ # License: GPLv3+ (see LICENSE).
+ #}
+{% import '@pncp/macros.html.twig' as pncp %}
+
+<div class="card mb-3">
+   <div class="card-body">
+      {{ pncp.header(item, f, null, 'ti ti-calendar-dollar') }}
+      <div class="row">
+         {{ pncp.row(__('Year', 'pncp'), f['year']) }}
+         {{ pncp.row(__('Item number', 'pncp'), f['item_number']) }}
+         {{ pncp.row(__('Category'), f['category_name']) }}
+         {{ pncp.row(__('Catalog class', 'pncp'), f['catalog_class']) }}
+         {{ pncp.row(__('Procurement group', 'pncp'), f['group_name']) }}
+         {{ pncp.row(__('Quantity'), f['quantity']) }}
+         {{ pncp.row(__('Unit value', 'pncp'), pncp.money(f['unit_value'])) }}
+         {{ pncp.row(__('Total value', 'pncp'), pncp.money(f['total_value'])) }}
+         {{ pncp.row(__('Desired date', 'pncp'), pncp.date(f['date_desired'])) }}
+         {{ pncp.row(__('Updated on PNCP', 'pncp'), f['date_update']) }}
+      </div>
+   </div>
+   {% if can_purge %}
+      <div class="card-footer">
+         {{ pncp.action(item.getFormURL(), f['id'], 'purge', __('Delete permanently'), 'ti ti-trash', 'btn-outline-danger', __('Remove this record from GLPI? It can be imported again.', 'pncp')) }}
+      </div>
+   {% endif %}
+</div>

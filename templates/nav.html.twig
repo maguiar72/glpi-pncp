@@ -1,0 +1,20 @@
+{#
+ # PNCP plugin for GLPI — shortcut bar shown at the top of every plugin page.
+ # License: GPLv3+ (see LICENSE).
+ #}
+<nav class="pncp-nav row row-cards g-2 mb-3" aria-label="PNCP">
+   {% for c in cards %}
+      <div class="col-6 col-md-4 col-xl-2">
+         <a class="card card-sm card-link {{ c.active ? 'pncp-nav-active border-primary' : '' }}" href="{{ c.url }}"
+            {% if c.active %}aria-current="page"{% endif %}>
+            <div class="card-body d-flex align-items-center py-2">
+               <span class="avatar avatar-sm {{ c.active ? 'bg-primary text-white' : 'bg-primary-lt' }} me-2"><i class="{{ c.icon }}"></i></span>
+               <div class="text-truncate">
+                  <div class="fw-medium text-truncate">{{ c.label }}</div>
+                  {% if c.count is not null %}<div class="text-secondary small">{{ c.count }}</div>{% endif %}
+               </div>
+            </div>
+         </a>
+      </div>
+   {% endfor %}
+</nav>

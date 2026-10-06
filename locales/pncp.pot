@@ -1,0 +1,832 @@
+# PNCP plugin for GLPI
+# This file is distributed under the same license as the plugin (GPLv3+).
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: front/documents.php:49
+msgid "%d document(s) imported."
+msgstr ""
+
+#: templates/documents.html.twig:23
+msgid "%d file(s)"
+msgstr ""
+
+#: front/search.php:40
+msgid "%d record(s) imported."
+msgstr ""
+
+#: front/watch.form.php:51
+msgid "%d records synchronized. The rest continues in the background (automatic action)."
+msgstr ""
+
+#: templates/search.html.twig:69
+msgid "%d result(s)"
+msgstr ""
+
+#: templates/config.html.twig:34
+msgid "(\"pncpsync\" must run in CLI mode, via the GLPI cron)."
+msgstr ""
+
+#: templates/config.html.twig:21
+msgid "A monitoring with a pending backlog is resumed at every automatic action run, regardless of this interval."
+msgstr ""
+
+#: src/Watch.php:216
+msgid "A synchronization of this monitoring is already running."
+msgstr ""
+
+#: src/Lifecycle.php:68
+msgid "Active"
+msgstr ""
+
+#: templates/contract.html.twig:82
+msgid "Added value"
+msgstr ""
+
+#: templates/search.html.twig:26 templates/watch_form.html.twig:17
+msgid "All units"
+msgstr ""
+
+#: templates/contract.html.twig:69
+msgid "Amendments"
+msgstr ""
+
+#: templates/contract.html.twig:71
+msgid "Amendments not synchronized yet."
+msgstr ""
+
+#: src/PcaItem.php:34
+msgid "Annual plan item (PCA)"
+msgid_plural "Annual plan items (PCA)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/watch_form.html.twig:38
+msgid "Annual procurement plan (PCA)"
+msgstr ""
+
+#: templates/config.html.twig:33
+msgid "Automatic actions"
+msgstr ""
+
+#: templates/linktab.html.twig:42 templates/procurement.html.twig:61
+msgid "Awarded total"
+msgstr ""
+
+#: templates/linktab.html.twig:41 templates/procurement.html.twig:60
+msgid "Awarded unit value"
+msgstr ""
+
+#: src/Procurement.php:59 templates/procurement.html.twig:20
+msgid "Awarded value"
+msgstr ""
+
+#: src/PriceRecord.php:61 templates/procurement.html.twig:122
+msgid "Cancelled"
+msgstr ""
+
+#: src/PcaItem.php:54 templates/pcaitem.html.twig:14
+msgid "Catalog class"
+msgstr ""
+
+#: templates/watch_form.html.twig:12
+msgid "CNPJ of the publishing organization (órgão). Large organizations publish many units under one CNPJ."
+msgstr ""
+
+#: src/Watch.php:176 templates/watch_form.html.twig:26
+msgid "Collect from"
+msgstr ""
+
+#: templates/watch_form.html.twig:62
+msgid "Collected up to"
+msgstr ""
+
+#: templates/watch_form.html.twig:36
+msgid "Contract amendments"
+msgstr ""
+
+#: src/Lifecycle.php:166
+msgid "Contract lifecycle (PNCP plugin)"
+msgstr ""
+
+#: front/contract.form.php:42
+msgid "Contract refreshed from PNCP."
+msgstr ""
+
+#: templates/procurement.html.twig:101 templates/watch_form.html.twig:35
+msgid "Contracts"
+msgstr ""
+
+#: templates/watch_counts.html.twig:22
+msgid "Contracts copied to GLPI: %d"
+msgstr ""
+
+#: templates/config.html.twig:16
+msgid "Contracts/records/PCA window (days)"
+msgstr ""
+
+#: front/contract.form.php:56
+msgid "Copied to GLPI contracts: %s"
+msgstr ""
+
+#: src/Contract.php:68
+msgid "Copied to GLPI on"
+msgstr ""
+
+#: templates/contract.html.twig:16
+msgid "Copied to GLPI on %s."
+msgstr ""
+
+#: src/Watch.php:181 templates/watch_form.html.twig:44
+msgid "Copy contracts automatically"
+msgstr ""
+
+#: src/Contract.php:156 templates/contract.html.twig:57
+msgid "Copy supplier to GLPI"
+msgstr ""
+
+#: src/Watch.php:180 templates/watch_form.html.twig:41
+msgid "Copy suppliers automatically"
+msgstr ""
+
+#: templates/watch_form.html.twig:40
+msgid "Copy to GLPI"
+msgstr ""
+
+#: templates/contract.html.twig:54
+msgid "Copy to GLPI contracts"
+msgstr ""
+
+#: src/Contract.php:153
+msgid "Copy to GLPI contracts (with supplier)"
+msgstr ""
+
+#: src/Procurement.php:119
+msgid "Copy winning suppliers to GLPI"
+msgstr ""
+
+#: src/Exporter.php:158
+msgid "Could not create contract %s"
+msgstr ""
+
+#: src/Exporter.php:86
+msgid "Could not create supplier %s"
+msgstr ""
+
+#: src/Profile.php:72
+msgid "Create monitorings"
+msgstr ""
+
+#: src/Exporter.php:83
+msgid "Created from PNCP (Portal Nacional de Contratações Públicas)"
+msgstr ""
+
+#: templates/watch_form.html.twig:42
+msgid "Creates GLPI suppliers for the suppliers of the contracts, matched by CNPJ/CPF (never duplicated). Item winners: copy them on demand."
+msgstr ""
+
+#: templates/watch_form.html.twig:45
+msgid "Creates/updates GLPI contracts at each synchronization. Off: copy them on demand from the PNCP contracts list."
+msgstr ""
+
+#: templates/search.html.twig:59
+msgid "Data from the Portal Nacional de Contratações Públicas (pncp.gov.br)."
+msgstr ""
+
+#: templates/config.html.twig:14
+msgid "Days per query when collecting procurements by CNPJ. Large organizations time out with long windows; 31 is safe."
+msgstr ""
+
+#: src/PcaItem.php:59 templates/pcaitem.html.twig:19
+msgid "Desired date"
+msgstr ""
+
+#: front/documents.php:59 templates/documents.html.twig:9 templates/documents_panel.html.twig:9
+msgid "Documents published on PNCP"
+msgstr ""
+
+#: templates/search.html.twig:15
+msgid "e.g. cleaning services, notebook, organization name"
+msgstr ""
+
+#: templates/procurement.html.twig:58
+msgid "Estimated unit value"
+msgstr ""
+
+#: src/Procurement.php:58 templates/procurement.html.twig:19
+msgid "Estimated value"
+msgstr ""
+
+#: src/Lifecycle.php:70
+msgid "Expired"
+msgstr ""
+
+#: src/Lifecycle.php:69
+msgid "Extended"
+msgstr ""
+
+#: src/Documents.php:217
+msgid "File %s is no longer listed on PNCP."
+msgstr ""
+
+#: templates/watch_form.html.twig:27
+msgid "First date of the first collection. Earlier dates cost more requests (the portal must be queried month by month)."
+msgstr ""
+
+#: src/Contract.php:60 templates/contract.html.twig:35 templates/contract.html.twig:83
+msgid "Global value"
+msgstr ""
+
+#: src/Exporter.php:312
+msgid "Global value (PNCP)"
+msgstr ""
+
+#: src/Contract.php:66
+msgid "GLPI contract"
+msgstr ""
+
+#: src/Documents.php:274
+msgid "GLPI refused the file %s (type not allowed in Setup > Dropdowns > Document types?)"
+msgstr ""
+
+#: src/Contract.php:67
+msgid "GLPI supplier"
+msgstr ""
+
+#: templates/config.html.twig:19
+msgid "Hours between synchronizations"
+msgstr ""
+
+#: templates/search.html.twig:145
+msgid "How it works"
+msgstr ""
+
+#: templates/documents.html.twig:26 templates/search.html.twig:72
+msgid "Import selected"
+msgstr ""
+
+#: templates/pricerecord.html.twig:45
+msgid "Import the procurement with its items to see the suppliers."
+msgstr ""
+
+#: templates/documents.html.twig:59 templates/search.html.twig:119
+msgid "Imported"
+msgstr ""
+
+#: templates/search.html.twig:150
+msgid "Imported contracts can be copied to GLPI Contracts, and suppliers to GLPI Suppliers."
+msgstr ""
+
+#: src/Watch.php:74
+msgid "Imported data"
+msgstr ""
+
+#: templates/procurement.html.twig:107
+msgid "in GLPI"
+msgstr ""
+
+#: templates/documents.html.twig:61
+msgid "In GLPI, not linked here"
+msgstr ""
+
+#: src/Lifecycle.php:71
+msgid "Inactive (terminated)"
+msgstr ""
+
+#: src/SearchPage.php:73
+msgid "Inform a text (name, object...) or an organization CNPJ."
+msgstr ""
+
+#: templates/contract.html.twig:34
+msgid "Initial value"
+msgstr ""
+
+#: src/SearchPage.php:79 src/Watch.php:111
+msgid "Invalid CNPJ"
+msgstr ""
+
+#: src/PcaItem.php:52 templates/pcaitem.html.twig:12
+msgid "Item number"
+msgstr ""
+
+#: templates/procurement.html.twig:47
+msgid "Items and results"
+msgstr ""
+
+#: templates/watch_form.html.twig:34
+msgid "Items and results (winners, prices)"
+msgstr ""
+
+#: templates/procurement.html.twig:49
+msgid "Items not synchronized yet."
+msgstr ""
+
+#: src/Procurement.php:65 templates/procurement.html.twig:24
+msgid "Items synchronized on"
+msgstr ""
+
+#: templates/linktab.html.twig:32
+msgid "Items won in procurements"
+msgstr ""
+
+#: src/Record.php:120 src/Watch.php:178 templates/watch_form.html.twig:50
+msgid "Last synchronization"
+msgstr ""
+
+#: src/Procurement.php:64 templates/procurement.html.twig:17
+msgid "Legal basis"
+msgstr ""
+
+#: src/Contract.php:69 templates/contract.html.twig:26
+msgid "Lifecycle"
+msgstr ""
+
+#: src/Exporter.php:289
+msgid "Link"
+msgstr ""
+
+#: templates/linktab.html.twig:8
+msgid "Linked to PNCP identifier"
+msgstr ""
+
+#: templates/search.html.twig:16
+msgid "Matches organization, unit, object and supplier names."
+msgstr ""
+
+#: templates/watch_form.html.twig:53 templates/watch_log.html.twig:19
+msgid "Message"
+msgstr ""
+
+#: templates/config.html.twig:25
+msgid "Minimum interval between requests (seconds)"
+msgstr ""
+
+#: src/Procurement.php:56 templates/procurement.html.twig:13
+msgid "Modality"
+msgstr ""
+
+#: templates/search.html.twig:111
+msgid "Monitor"
+msgstr ""
+
+#: templates/search.html.twig:56
+msgid "Monitor this organization/unit"
+msgstr ""
+
+#: src/Watch.php:51
+msgid "Monitoring"
+msgid_plural "Monitorings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/search.html.twig:13
+msgid "Name or text"
+msgstr ""
+
+#: templates/contract.html.twig:71
+msgid "No amendment published."
+msgstr ""
+
+#: templates/documents.html.twig:31
+msgid "No file published on PNCP for these records."
+msgstr ""
+
+#: templates/procurement.html.twig:110
+msgid "No imported contract for this procurement."
+msgstr ""
+
+#: templates/procurement.html.twig:125
+msgid "No imported price registration record."
+msgstr ""
+
+#: templates/watch_log.html.twig:7
+msgid "No synchronization yet."
+msgstr ""
+
+#: templates/watch_form.html.twig:59
+msgid "Not collected yet"
+msgstr ""
+
+#: templates/documents.html.twig:63
+msgid "Not imported"
+msgstr ""
+
+#: src/Lifecycle.php:67
+msgid "Not started"
+msgstr ""
+
+#: templates/search.html.twig:77
+msgid "Nothing found."
+msgstr ""
+
+#: src/Record.php:117 templates/contract.html.twig:48 templates/contract.html.twig:79 templates/pricerecord.html.twig:28 templates/procurement.html.twig:27
+msgid "Object"
+msgstr ""
+
+#: templates/contract.html.twig:17
+msgid "Open GLPI contract"
+msgstr ""
+
+#: templates/contract.html.twig:18
+msgid "Open GLPI supplier"
+msgstr ""
+
+#: templates/macros.html.twig:48
+msgid "Open on PNCP"
+msgstr ""
+
+#: templates/watch_form.html.twig:15
+msgid "Optional. Code of the administrative unit (e.g. 012345). Empty = every unit of the CNPJ."
+msgstr ""
+
+#: templates/config.html.twig:29
+msgid "Optional. Identify your institution to the portal (e.g. \"GLPI-PNCP/0.1 (ti@example.gov.br)\")."
+msgstr ""
+
+#: src/Record.php:113
+msgid "Organization"
+msgstr ""
+
+#: templates/search.html.twig:85
+msgid "Organization / unit"
+msgstr ""
+
+#: src/Record.php:112 src/Watch.php:174 templates/search.html.twig:19 templates/watch_form.html.twig:10
+msgid "Organization CNPJ"
+msgstr ""
+
+#: templates/procurement.html.twig:32
+msgid "Origin system"
+msgstr ""
+
+#: templates/search.html.twig:134
+msgid "Page %1$d of %2$d"
+msgstr ""
+
+#: templates/procurement.html.twig:24
+msgid "Pending"
+msgstr ""
+
+#: templates/watch_log.html.twig:14
+msgid "Phase"
+msgstr ""
+
+#: src/Contract.php:41
+msgid "PNCP contract"
+msgid_plural "PNCP contracts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/linktab.html.twig:18
+msgid "PNCP contracts"
+msgstr ""
+
+#: src/Record.php:111
+msgid "PNCP control number"
+msgstr ""
+
+#: front/contract.form.php:44 front/procurement.form.php:44 src/SearchPage.php:103
+msgid "PNCP error: %s"
+msgstr ""
+
+#: src/SearchPage.php:102
+msgid "PNCP took too long to answer. Try again in a few moments."
+msgstr ""
+
+#: front/documents.php:51 front/search.php:42
+msgid "PNCP was slow: some records were not imported. Select them again."
+msgstr ""
+
+#: src/Profile.php:67
+msgid "PNCP: search, monitorings and imported data"
+msgstr ""
+
+#: src/Procurement.php:63 templates/procurement.html.twig:18
+msgid "Price registration (SRP)"
+msgstr ""
+
+#: src/PriceRecord.php:34
+msgid "Price registration record"
+msgid_plural "Price registration records"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/procurement.html.twig:117 templates/watch_form.html.twig:37
+msgid "Price registration records"
+msgstr ""
+
+#: src/Contract.php:64 src/Exporter.php:295 src/Procurement.php:62 templates/contract.html.twig:33 templates/procurement.html.twig:16
+msgid "Process"
+msgstr ""
+
+#: src/Procurement.php:41
+msgid "Procurement"
+msgid_plural "Procurements"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/PcaItem.php:55 templates/pcaitem.html.twig:15
+msgid "Procurement group"
+msgstr ""
+
+#: front/procurement.form.php:42
+msgid "Procurement refreshed from PNCP (%d items)."
+msgstr ""
+
+#: templates/config.html.twig:12
+msgid "Procurement window (days)"
+msgstr ""
+
+#: templates/watch_form.html.twig:33
+msgid "Procurements"
+msgstr ""
+
+#: templates/watch_counts.html.twig:19
+msgid "Procurements waiting for items/results: %d"
+msgstr ""
+
+#: src/Procurement.php:61 templates/procurement.html.twig:22
+msgid "Proposals until"
+msgstr ""
+
+#: src/Procurement.php:60 templates/documents.html.twig:41 templates/procurement.html.twig:21
+msgid "Publication date"
+msgstr ""
+
+#: src/Record.php:75
+msgid "Raw data"
+msgstr ""
+
+#: templates/documents.html.twig:40 templates/search.html.twig:84
+msgid "Record"
+msgstr ""
+
+#: templates/raw.html.twig:5
+msgid "Record exactly as returned by the PNCP API (source of truth for every other field)."
+msgstr ""
+
+#: templates/watch_log.html.twig:16
+msgid "Records"
+msgstr ""
+
+#: templates/contract.html.twig:60
+msgid "Refresh from PNCP"
+msgstr ""
+
+#: templates/procurement.html.twig:38
+msgid "Refresh from PNCP (with items)"
+msgstr ""
+
+#: templates/pricerecord.html.twig:40
+msgid "Registered suppliers (item winners)"
+msgstr ""
+
+#: templates/pcaitem.html.twig:25 templates/pricerecord.html.twig:34 templates/procurement.html.twig:41
+msgid "Remove this record from GLPI? It can be imported again."
+msgstr ""
+
+#: templates/contract.html.twig:63
+msgid "Remove this record from GLPI? The GLPI contract, if any, is kept."
+msgstr ""
+
+#: templates/watch_log.html.twig:17
+msgid "Requests"
+msgstr ""
+
+#: templates/config.html.twig:26
+msgid "Requests are sequential on purpose: parallel requests only multiply HTTP 429 answers from the portal."
+msgstr ""
+
+#: templates/watch_form.html.twig:66
+msgid "Runs for up to one minute; the automatic action continues the rest."
+msgstr ""
+
+#: templates/search.html.twig:147
+msgid "Search by name/text, or by organization CNPJ (optionally narrowed to one unit and one year)."
+msgstr ""
+
+#: templates/documents_panel.html.twig:15
+msgid "Search documents on PNCP"
+msgstr ""
+
+#: front/search.php:51 src/Console/SelfTestCommand.php:78 templates/search.html.twig:8
+msgid "Search PNCP"
+msgstr ""
+
+#: front/documents.php:45 front/search.php:37
+msgid "Select at least one record."
+msgstr ""
+
+#: templates/search.html.twig:148
+msgid "Select records and click \"Import selected\": procurements come with items and results, contracts with amendments, price records with their procurement."
+msgstr ""
+
+#: front/config.form.php:35
+msgid "Settings saved."
+msgstr ""
+
+#: src/Contract.php:63 src/PriceRecord.php:63 templates/contract.html.twig:36 templates/contract.html.twig:80 templates/pricerecord.html.twig:16
+msgid "Signature date"
+msgstr ""
+
+#: src/Contract.php:65 src/Exporter.php:292 src/PriceRecord.php:62 templates/contract.html.twig:42 templates/contract.html.twig:44 templates/linktab.html.twig:37 templates/pricerecord.html.twig:22 templates/pricerecord.html.twig:24
+msgid "Source procurement"
+msgstr ""
+
+#: src/Documents.php:127
+msgid "Source procurement %s"
+msgstr ""
+
+#: src/Contract.php:59 templates/contract.html.twig:32
+msgid "Supplier CNPJ/CPF"
+msgstr ""
+
+#: front/contract.form.php:67 front/procurement.form.php:54
+msgid "Supplier copied to GLPI: %s"
+msgstr ""
+
+#: templates/procurement.html.twig:86
+msgid "Supplier → GLPI"
+msgstr ""
+
+#: templates/watch_form.html.twig:49
+msgid "Synchronization"
+msgstr ""
+
+#: front/watch.form.php:50
+msgid "Synchronization complete: %d records."
+msgstr ""
+
+#: front/watch.form.php:53
+msgid "Synchronization failed: %s"
+msgstr ""
+
+#: src/Watch.php:75
+msgid "Synchronization log"
+msgstr ""
+
+#: src/Profile.php:71
+msgid "Synchronize / import / copy to GLPI"
+msgstr ""
+
+#: src/Watch.php:241
+msgid "Synchronize monitored PNCP scopes"
+msgstr ""
+
+#: templates/watch_form.html.twig:68
+msgid "Synchronize now"
+msgstr ""
+
+#: templates/contract.html.twig:81
+msgid "Term"
+msgstr ""
+
+#: src/SearchPage.php:83
+msgid "This CNPJ has no units registered on PNCP."
+msgstr ""
+
+#: templates/pricerecord.html.twig:12
+msgid "This price registration record was cancelled."
+msgstr ""
+
+#: templates/linktab.html.twig:11
+msgid "This supplier was not created from PNCP data."
+msgstr ""
+
+#: templates/config.html.twig:23
+msgid "Time budget of an automatic action run (seconds)"
+msgstr ""
+
+#: templates/config.html.twig:24
+msgid "Time budget of an interactive action (seconds)"
+msgstr ""
+
+#: templates/search.html.twig:149
+msgid "To keep an organization or unit up to date automatically, create a monitoring."
+msgstr ""
+
+#: src/PcaItem.php:58 templates/pcaitem.html.twig:18
+msgid "Total value"
+msgstr ""
+
+#: src/Record.php:115 templates/watch_form.html.twig:21
+msgid "Unit"
+msgstr ""
+
+#: src/SearchPage.php:89
+msgid "Unit %s not found for this CNPJ."
+msgstr ""
+
+#: src/Record.php:114 src/Watch.php:175 templates/search.html.twig:23 templates/watch_form.html.twig:23
+msgid "Unit code"
+msgstr ""
+
+#: src/PcaItem.php:57 templates/pcaitem.html.twig:17
+msgid "Unit value"
+msgstr ""
+
+#: templates/procurement.html.twig:106
+msgid "until"
+msgstr ""
+
+#: templates/contract.html.twig:54
+msgid "Update GLPI contract"
+msgstr ""
+
+#: src/Record.php:119 templates/contract.html.twig:39 templates/pcaitem.html.twig:20 templates/pricerecord.html.twig:19 templates/procurement.html.twig:23
+msgid "Updated on PNCP"
+msgstr ""
+
+#: templates/config.html.twig:28
+msgid "User-Agent"
+msgstr ""
+
+#: templates/search.html.twig:86
+msgid "Value"
+msgstr ""
+
+#: templates/watch_form.html.twig:32
+msgid "What to collect"
+msgstr ""
+
+#: templates/watch_log.html.twig:15
+msgid "Window"
+msgstr ""
+
+#: templates/procurement.html.twig:59
+msgid "Winner"
+msgstr ""
+
+
+#: templates/watch_form.html.twig:37
+msgid "Contract commitments (empenhos)"
+msgstr ""
+
+#: templates/contract.html.twig:106
+msgid "Commitments (empenhos)"
+msgstr ""
+
+#: templates/contract.html.twig:109
+msgid "No commitment published."
+msgstr ""
+
+#: templates/contract.html.twig:109
+msgid "Commitments not synchronized yet."
+msgstr ""
+
+#: templates/contract.html.twig:115
+msgid "Commitment"
+msgstr ""
+
+#: templates/contract.html.twig:117
+msgid "Issue date"
+msgstr ""
+
+#: templates/contract.html.twig:118
+msgid "Creditor"
+msgstr ""
+
+#: templates/contract.html.twig:119
+msgid "Expense nature"
+msgstr ""
+
+msgid "GLPI contract not found or not editable."
+msgstr ""
+
+msgid "This GLPI contract is already linked to another PNCP contract."
+msgstr ""
+
+msgid "Linked to the existing GLPI contract: %s. Fields already filled in were kept; empty ones were completed."
+msgstr ""
+
+msgid "A matching GLPI contract already existed and was linked: %s. Fields already filled in were kept."
+msgstr ""
+
+msgid "GLPI contracts that look like this one"
+msgstr ""
+
+msgid "The contract currently linked was created by the copy. Linking to the existing one keeps what is already filled in there and sends the copy to the GLPI trash."
+msgstr ""
+
+msgid "Same number/year already registered in GLPI. Link instead of creating a duplicate: what is already filled in is kept, empty fields are completed."
+msgstr ""
+
+msgid "Number only"
+msgstr ""
+
+msgid "Link to this contract"
+msgstr ""
+
+msgid "Link to this GLPI contract?"
+msgstr ""
+
+msgid "Also linked to the GLPI contract: %s."
+msgstr ""
+
+msgid "This contract was not copied to GLPI yet: the documents appear in the GLPI contract once you copy it."
+msgstr ""
+
+msgid "Year"
+msgstr ""

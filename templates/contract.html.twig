@@ -1,0 +1,159 @@
+{#
+ # PNCP plugin for GLPI — PNCP contract detail.
+ # License: GPLv3+ (see LICENSE).
+ #}
+{% import '@pncp/macros.html.twig' as pncp %}
+{% set form_url = item.getFormURL() %}
+
+<div class="card mb-3">
+   <div class="card-body">
+      {{ pncp.header(item, f, portal_url, 'ti ti-writing-sign') }}
+
+      {% if glpi_contract_url %}
+         <div class="alert alert-success d-flex align-items-center flex-wrap gap-2">
+            <i class="ti ti-circle-check fs-3 me-1"></i>
+            <div class="me-auto">{{ __('Copied to GLPI on %s.', 'pncp')|format(pncp.date(f['date_export'])) }}</div>
+            <a href="{{ glpi_contract_url }}" class="btn btn-success"><i class="ti ti-external-link"></i><span>{{ __('Open GLPI contract', 'pncp') }}</span></a>
+            {% if glpi_supplier_url %}
+               <a href="{{ glpi_supplier_url }}" class="btn btn-outline-success"><i class="ti ti-truck"></i><span>{{ __('Open GLPI supplier', 'pncp') }}</span></a>
+            {% endif %}
+         </div>
+      {% endif %}
+
+      {% if candidates is not empty %}
+         <div class="alert alert-warning">
+            <div class="fw-bold mb-2"><i class="ti ti-copy-check me-1"></i>{{ __('GLPI contracts that look like this one', 'pncp') }}</div>
+            <div class="mb-2 small">
+               {% if glpi_contract_url %}
+                  {{ __('The contract currently linked was created by the copy. Linking to the existing one keeps what is already filled in there and sends the copy to the GLPI trash.', 'pncp') }}
+               {% else %}
+                  {{ __('Same number/year already registered in GLPI. Link instead of creating a duplicate: what is already filled in is kept, empty fields are completed.', 'pncp') }}
+               {% endif %}
+            </div>
+            <table class="table table-sm mb-0">
+               {% for c in candidates %}
+                  <tr>
+                     <td><a href="{{ call('Contract::getFormURLWithID', [c.id]) }}">{{ c.name }}</a>
+                        <span class="text-secondary">· {{ c.num }}{% if c.begin_date %} · {{ pncp.date(c.begin_date) }}{% endif %}</span></td>
+                     <td>{% for r in c.reasons %}<span class="badge bg-success-lt me-1">{{ r }}</span>{% else %}<span class="badge bg-secondary-lt">{{ __('Number only', 'pncp') }}</span>{% endfor %}</td>
+                     <td class="text-end">{{ pncp.action(form_url, f['id'], 'link_contract', __('Link to this contract', 'pncp'), 'ti ti-link', 'btn-primary', __('Link to this GLPI contract?', 'pncp'), {'glpi_id': c.id}) }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </div>
+      {% endif %}
+
+      <div class="row">
+         {% if lifecycle_label %}
+            {% set lifecycle_badge %}<span class="badge {{ lifecycle_class }} fs-5">{{ lifecycle_label }}</span>{% endset %}
+            {{ pncp.row(__('Lifecycle', 'pncp'), lifecycle_badge, true) }}
+         {% endif %}
+         {{ pncp.row(__('Type'), f['type_name']) }}
+         {{ pncp.row(__('Number'), f['number'] ~ '/' ~ f['year']) }}
+         {{ pncp.row(__('Category'), f['category_name']) }}
+         {{ pncp.row(__('Supplier'), f['supplier_name']) }}
+         {{ pncp.row(__('Supplier CNPJ/CPF', 'pncp'), supplier_ni_formatted) }}
+         {{ pncp.row(__('Process', 'pncp'), f['process']) }}
+         {{ pncp.row(__('Initial value', 'pncp'), pncp.money(f['initial_value'])) }}
+         {{ pncp.row(__('Global value', 'pncp'), pncp.money(f['global_value'])) }}
+         {{ pncp.row(__('Signature date', 'pncp'), pncp.date(f['date_signature'])) }}
+         {{ pncp.row(__('Start date'), pncp.date(f['begin_date'])) }}
+         {{ pncp.row(__('End date'), pncp.date(f['end_date'])) }}
+         {{ pncp.row(__('Updated on PNCP', 'pncp'), pncp.date(f['date_update'])) }}
+         {% if procurement %}
+            {% set proc_link %}<a href="{{ call('GlpiPlugin\\Pncp\\Procurement::getFormURLWithID', [procurement.id]) }}">{{ procurement.name }}</a>{% endset %}
+            {{ pncp.row(__('Source procurement', 'pncp'), proc_link, true) }}
+         {% else %}
+            {{ pncp.row(__('Source procurement', 'pncp'), f['procurement_control_number']) }}
+         {% endif %}
+      </div>
+      <div>
+         <div class="text-secondary small">{{ __('Object', 'pncp') }}</div>
+         <div class="text-break">{{ f['object']|nl2br }}</div>
+      </div>
+   </div>
+   <div class="card-footer">
+      {% if can_export %}
+         {{ pncp.action(form_url, f['id'], 'export_contract', glpi_contract_url ? __('Update GLPI contract', 'pncp') : __('Copy to GLPI contracts', 'pncp'), 'ti ti-file-export', 'btn-primary') }}
+      {% endif %}
+      {% if can_update and f['supplier_ni'] %}
+         {{ pncp.action(form_url, f['id'], 'export_supplier', __('Copy supplier to GLPI', 'pncp'), 'ti ti-truck') }}
+      {% endif %}
+      {% if can_update %}
+         {{ pncp.action(form_url, f['id'], 'refresh', __('Refresh from PNCP', 'pncp'), 'ti ti-refresh') }}
+      {% endif %}
+      {% if can_purge %}
+         {{ pncp.action(form_url, f['id'], 'purge', __('Delete permanently'), 'ti ti-trash', 'btn-outline-danger', __('Remove this record from GLPI? The GLPI contract, if any, is kept.', 'pncp')) }}
+      {% endif %}
+   </div>
+</div>
+
+<div class="card mb-3">
+   <div class="card-header"><h3 class="card-title"><i class="ti ti-file-plus me-1"></i>{{ __('Amendments', 'pncp') }} ({{ amendments|length }})</h3></div>
+   {% if amendments is empty %}
+      <div class="card-body text-secondary">{{ f['amendments_version'] ? __('No amendment published.', 'pncp') : __('Amendments not synchronized yet.', 'pncp') }}</div>
+   {% else %}
+      <div class="table-responsive">
+         <table class="table table-sm card-table">
+            <thead>
+               <tr>
+                  <th>#</th>
+                  <th>{{ __('Type') }}</th>
+                  <th>{{ __('Object', 'pncp') }}</th>
+                  <th>{{ __('Signature date', 'pncp') }}</th>
+                  <th>{{ __('Term', 'pncp') }}</th>
+                  <th class="text-end">{{ __('Added value', 'pncp') }}</th>
+                  <th class="text-end">{{ __('Global value', 'pncp') }}</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for a in amendments %}
+                  <tr>
+                     <td>{{ a.sequential }}</td>
+                     <td>{{ a.type_name }}</td>
+                     <td class="text-break">{{ a.object }}</td>
+                     <td class="text-nowrap">{{ pncp.date(a.date_signature) }}</td>
+                     <td class="text-nowrap">{{ pncp.date(a.begin_date) }}{% if a.end_date %} → {{ pncp.date(a.end_date) }}{% endif %}</td>
+                     <td class="text-end text-nowrap">{{ pncp.money(a.added_value) }}</td>
+                     <td class="text-end text-nowrap">{{ pncp.money(a.global_value) }}</td>
+                  </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   {% endif %}
+</div>
+
+<div class="card mb-3">
+   <div class="card-header"><h3 class="card-title"><i class="ti ti-receipt me-1"></i>{{ __('Commitments (empenhos)', 'pncp') }} ({{ commitments|length }})</h3></div>
+   {% if commitments is empty %}
+      <div class="card-body text-secondary">{{ f['commitments_version'] ? __('No commitment published.', 'pncp') : __('Commitments not synchronized yet.', 'pncp') }}</div>
+   {% else %}
+      <div class="table-responsive">
+         <table class="table table-sm card-table">
+            <thead>
+               <tr>
+                  <th>{{ __('Commitment', 'pncp') }}</th>
+                  <th>{{ __('Status') }}</th>
+                  <th>{{ __('Issue date', 'pncp') }}</th>
+                  <th>{{ __('Creditor', 'pncp') }}</th>
+                  <th>{{ __('Expense nature', 'pncp') }}</th>
+                  <th class="text-end">{{ __('Value', 'pncp') }}</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for c in commitments %}
+                  <tr>
+                     <td class="text-nowrap">{{ c.number }}</td>
+                     <td>{{ c.status_name }}{% if c.status_date %} <span class="text-secondary">({{ pncp.date(c.status_date) }})</span>{% endif %}</td>
+                     <td class="text-nowrap">{{ pncp.date(c.issue_date) }}</td>
+                     <td class="text-break">{{ c.creditor_name }}</td>
+                     <td class="text-nowrap">{{ c.expense_nature }}</td>
+                     <td class="text-end text-nowrap">{{ pncp.money(c.total_value) }}</td>
+                  </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   {% endif %}
+</div>

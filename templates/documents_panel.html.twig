@@ -1,0 +1,18 @@
+{#
+ # PNCP plugin for GLPI — panel added under the "Documents" tab.
+ # License: GPLv3+ (see LICENSE).
+ #}
+<div class="card mt-3 border-primary-subtle">
+   <div class="card-body d-flex flex-wrap align-items-center gap-2">
+      <i class="ti ti-building-bank fs-2 text-primary me-1"></i>
+      <div class="me-auto">
+         <div class="fw-medium">{{ __('Documents published on PNCP', 'pncp') }}</div>
+         <div class="small text-secondary">
+            {% for s in sources %}{{ s.label }}{% if not loop.last %} · {% endif %}{% endfor %}
+         </div>
+      </div>
+      <a class="btn btn-primary" href="{{ url }}">
+         <i class="ti ti-search"></i><span>{{ __('Search documents on PNCP', 'pncp') }}</span>
+      </a>
+   </div>
+</div>

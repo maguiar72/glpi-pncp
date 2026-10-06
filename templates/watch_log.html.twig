@@ -1,0 +1,38 @@
+{#
+ # PNCP plugin for GLPI — synchronization log tab.
+ # License: GPLv3+ (see LICENSE).
+ #}
+{% import '@pncp/macros.html.twig' as pncp %}
+{% set status_class = {'ok': 'bg-success-lt', 'partial': 'bg-warning-lt', 'error': 'bg-danger-lt'} %}
+{% if rows is empty %}
+   <div class="alert alert-info">{{ __('No synchronization yet.', 'pncp') }}</div>
+{% else %}
+   <div class="table-responsive">
+      <table class="table table-sm table-hover card-table">
+         <thead>
+            <tr>
+               <th>{{ __('Date') }}</th>
+               <th>{{ __('Phase', 'pncp') }}</th>
+               <th>{{ __('Window', 'pncp') }}</th>
+               <th class="text-end">{{ __('Records', 'pncp') }}</th>
+               <th class="text-end">{{ __('Requests', 'pncp') }}</th>
+               <th>{{ __('Status') }}</th>
+               <th>{{ __('Message', 'pncp') }}</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for r in rows %}
+               <tr>
+                  <td class="text-nowrap">{{ pncp.date(r.date) }}</td>
+                  <td>{{ r.phase }}</td>
+                  <td class="text-nowrap">{% if r.window_begin %}{{ pncp.date(r.window_begin) }} → {{ pncp.date(r.window_end) }}{% endif %}</td>
+                  <td class="text-end">{{ r.records }}</td>
+                  <td class="text-end">{{ r.requests }}</td>
+                  <td><span class="badge {{ status_class[r.status] ?? 'bg-secondary-lt' }}">{{ r.status }}</span></td>
+                  <td class="small text-break">{{ r.message }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+{% endif %}

@@ -1,0 +1,17 @@
+/*
+ * PNCP plugin for GLPI
+ * License: GPLv3+ (see LICENSE).
+ */
+
+.pncp-raw {
+    max-height: 70vh;
+    overflow: auto;
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: var(--tblr-bg-surface-secondary, #f6f8fb);
+}
+
+.pncp-search .table td {
+    vertical-align: top;
+}
