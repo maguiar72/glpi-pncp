@@ -12,6 +12,10 @@ All notable changes to this project are documented here. The format follows [Kee
 - "GLPI contracts that look like this one" panel on the PNCP contract page with a "Link to this contract" button (merge); a copy created earlier by the plugin goes to the GLPI trash.
 - "Open GLPI contract" / "Open GLPI supplier" buttons on the PNCP contract page, and "Open GLPI contract" on the PNCP documents page.
 
+### Added
+
+- PCA items: *Open on PNCP* button on the item page (link to the plan on the portal) and an *Open on PNCP* card in the shortcut bar of the PCA items list (plan of the most recent year).
+
 ### Changed
 
 - Dates on every plugin screen follow the GLPI display format (they were shown as `2026-09-30`); the end date written in the GLPI contract comment is `dd/mm/yyyy`.

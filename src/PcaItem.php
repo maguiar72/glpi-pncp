@@ -39,6 +39,41 @@ class PcaItem extends Record
         return 'ti ti-calendar-dollar';
     }
 
+    /**
+     * Portal page of the plan the item belongs to. Plan id "CNPJ-0-SEQ/YEAR" → https://pncp.gov.br/app/pca/CNPJ/YEAR/SEQ
+     * (same /app/<kind>/<cnpj>/<year>/<sequential> convention as procurements, contracts and records).
+     */
+    public function portalUrl(): ?string
+    {
+        return self::planUrl((string) ($this->fields['pca_id'] ?? ''));
+    }
+
+    public static function planUrl(string $planId): ?string
+    {
+        if (!preg_match('/^(\w{14})-\d+-(\d+)\/(\d{4})$/', $planId, $m)) {
+            return null;
+        }
+
+        return Util::portalUrl('pca', $m[1], (int) $m[3], (int) $m[2]);
+    }
+
+    /** Plan of the most recent year in GLPI, for the shortcut bar. */
+    public static function latestPlanUrl(): ?string
+    {
+        /** @var \DBmysql $DB */
+        global $DB;
+
+        $row = $DB->request([
+            'SELECT' => ['pca_id'],
+            'FROM'   => self::getTable(),
+            'WHERE'  => ['NOT' => ['pca_id' => null]] + getEntitiesRestrictCriteria(self::getTable(), '', '', true),
+            'ORDER'  => ['year DESC', 'pca_id DESC'],
+            'LIMIT'  => 1,
+        ])->current();
+
+        return $row ? self::planUrl((string) $row['pca_id']) : null;
+    }
+
     public function rawSearchOptions()
     {
         $t = self::getTable();

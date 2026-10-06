@@ -140,6 +140,9 @@ class Menu extends CommonGLPI
                 'active' => $current === $class,
             ];
         }
+        if ($current === PcaItem::class && ($plan = PcaItem::latestPlanUrl()) !== null) {
+            $cards[] = ['label' => __('Open on PNCP', 'pncp'), 'icon' => 'ti ti-external-link', 'url' => $plan, 'count' => null, 'active' => false, 'external' => true];
+        }
         TemplateRenderer::getInstance()->display('@pncp/nav.html.twig', ['cards' => $cards]);
     }
 }
